@@ -12,5 +12,6 @@ xcodebuild -project Utilitka.xcodeproj -scheme Utilitka -configuration Release \
 
 rm -rf dist && mkdir dist
 ditto -c -k --keepParent build/Build/Products/Release/Utilitka.app dist/Utilitka.zip
-shasum -a 256 dist/Utilitka.zip | tee dist/Utilitka.zip.sha256
+# Run from inside dist/ so the checksum file names just "Utilitka.zip", as users will have it.
+(cd dist && shasum -a 256 Utilitka.zip | tee Utilitka.zip.sha256)
 echo "Ready: dist/Utilitka.zip"
