@@ -21,6 +21,18 @@
 
 ## Встановлення
 
+### Через термінал
+
+Одна команда завантажує останню версію, перевіряє контрольну суму, кладе застосунок у «Програми» й запускає його. Нею ж можна оновлюватися.
+
+```bash
+cd /tmp && curl -fsSLO https://github.com/kirofeel/utilitka/releases/latest/download/Utilitka.zip && curl -fsSLO https://github.com/kirofeel/utilitka/releases/latest/download/Utilitka.zip.sha256 && shasum -a 256 -c Utilitka.zip.sha256 && pkill -x Utilitka; rm -rf /Applications/Utilitka.app && ditto -x -k Utilitka.zip /Applications && open /Applications/Utilitka.app
+```
+
+Якщо архів не збігається з опублікованою контрольною сумою, установка зупиниться. Застосунок, завантажений так, macOS не позначає як «з інтернету», тому попередження про розробника не з'явиться.
+
+### Вручну
+
 1. Завантажте `Utilitka.zip` зі сторінки [Releases](../../releases) і розпакуйте.
 2. Перетягніть `Utilitka.app` у папку «Програми».
 3. Відкрийте застосунок. Під час першого запуску macOS попередить, що не може перевірити розробника: застосунок не нотаризовано в Apple.
@@ -66,7 +78,13 @@ open Utilitka.xcodeproj
 
 Utilitka is a macOS menu bar app that shows CPU load (with a 5-second process average), memory, battery health, disk, network and Apple Silicon temperatures, and lets you quit heavy apps with a confirmation. It runs in the background at about 1% CPU.
 
-**Install:** download `Utilitka.zip` from Releases, move the app to Applications, open it, then allow it in *System Settings → Privacy & Security → Open Anyway* (the app is not notarized).
+**Install from Terminal** (downloads the latest release, verifies the checksum, installs to Applications and launches; also works for updates):
+
+```bash
+cd /tmp && curl -fsSLO https://github.com/kirofeel/utilitka/releases/latest/download/Utilitka.zip && curl -fsSLO https://github.com/kirofeel/utilitka/releases/latest/download/Utilitka.zip.sha256 && shasum -a 256 -c Utilitka.zip.sha256 && pkill -x Utilitka; rm -rf /Applications/Utilitka.app && ditto -x -k Utilitka.zip /Applications && open /Applications/Utilitka.app
+```
+
+**Install manually:** download `Utilitka.zip` from Releases, move the app to Applications, open it, then allow it in *System Settings → Privacy & Security → Open Anyway* (the app is not notarized).
 
 **Privacy:** no network access, no analytics, nothing leaves your Mac. It runs outside the App Sandbox because listing and quitting other processes is impossible inside it, and it can only quit processes owned by your user. Temperatures use private macOS functions also used by Stats and iStat Menus.
 
