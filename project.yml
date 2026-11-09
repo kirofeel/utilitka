@@ -9,8 +9,8 @@ settings:
     SWIFT_VERSION: "5.0"
     SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
     SWIFT_APPROACHABLE_CONCURRENCY: YES
-    MARKETING_VERSION: "0.1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "0.1.1"
+    CURRENT_PROJECT_VERSION: "2"
     # Ad-hoc "Sign to Run Locally". Pick your team in Xcode if you want a real certificate.
     CODE_SIGN_IDENTITY: "-"
     CODE_SIGN_STYLE: Automatic
