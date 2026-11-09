@@ -1,0 +1,49 @@
+name: Utilitka
+options:
+  bundleIdPrefix: app.utilitka
+  deploymentTarget:
+    macOS: "26.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    SWIFT_APPROACHABLE_CONCURRENCY: YES
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    # Ad-hoc "Sign to Run Locally". Pick your team in Xcode if you want a real certificate.
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Automatic
+targets:
+  Utilitka:
+    type: application
+    platform: macOS
+    sources: [Utilitka]
+    info:
+      path: Utilitka/Info.plist
+      properties:
+        CFBundleDisplayName: Utilitka
+        # Ukrainian first, so number, size and duration formatters speak Ukrainian.
+        CFBundleDevelopmentRegion: uk
+        CFBundleLocalizations: [uk]
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.utilities
+        NSHumanReadableCopyright: ""
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.utilitka.Utilitka
+        # Reading other processes and terminating them is impossible inside the App Sandbox.
+        ENABLE_APP_SANDBOX: NO
+        ENABLE_HARDENED_RUNTIME: YES
+        GENERATE_INFOPLIST_FILE: NO
+    scheme:
+      testTargets: [UtilitkaTests]
+  UtilitkaTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [UtilitkaTests]
+    dependencies:
+      - target: Utilitka
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
