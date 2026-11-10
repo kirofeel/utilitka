@@ -40,3 +40,16 @@ struct CPULoadTests {
         #expect(load == CPULoad(user: 0, system: 0, idle: 1))
     }
 }
+
+struct RefreshSettingsTests {
+    @Test func labelsReadNaturally() {
+        #expect(RefreshSettings.label(1) == "щосекунди")
+        #expect(RefreshSettings.label(2) == "кожні 2 с")
+        #expect(RefreshSettings.label(5) == "кожні 5 с")
+    }
+
+    @Test func defaultIsTwoSecondsAndAChoice() {
+        #expect(RefreshSettings.choices.contains(RefreshSettings.defaultInterval))
+        #expect(RefreshSettings.defaultInterval == 2)
+    }
+}

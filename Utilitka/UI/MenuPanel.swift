@@ -22,6 +22,7 @@ struct MenuPanel: View {
     @Environment(MetricsStore.self) private var store
     @Environment(\.openSettings) private var openSettings
     @AppStorage("panelTab") private var tab: PanelTab = .cpu
+    @AppStorage(RefreshSettings.interval) private var refreshInterval = RefreshSettings.defaultInterval
     @Namespace private var tabNamespace
 
     var body: some View {
@@ -92,7 +93,7 @@ struct MenuPanel: View {
                 .fill(Palette.mint)
                 .frame(width: 6, height: 6)
                 .shadow(color: Palette.mint, radius: 3)
-            Text(store.isPanelOpen ? "Оновлення щосекунди" : "Оновлення кожні 2 с")
+            Text("Оновлення " + RefreshSettings.label(refreshInterval))
                 .foregroundStyle(Palette.textSecondary)
             Spacer()
             Button("Налаштування…") {

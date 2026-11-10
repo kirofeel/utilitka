@@ -7,6 +7,7 @@ struct SettingsView: View {
     @AppStorage(MenuBarItem.showCPU) private var showCPU = true
     @AppStorage(MenuBarItem.showTemperature) private var showTemperature = true
     @AppStorage(MenuBarItem.showMemory) private var showMemory = false
+    @AppStorage(RefreshSettings.interval) private var refreshInterval = RefreshSettings.defaultInterval
     @AppStorage(AlertSettings.enabled) private var alertsEnabled = true
     @AppStorage(AlertSettings.cpuThreshold) private var alertThreshold = AlertSettings.defaultThreshold
     @AppStorage(AlertSettings.duration) private var alertDuration = AlertSettings.defaultDuration
@@ -21,6 +22,19 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            Section {
+                Picker("Оновлювати дані", selection: $refreshInterval) {
+                    ForEach(RefreshSettings.choices, id: \.self) { seconds in
+                        Text(RefreshSettings.label(seconds).capitalizedFirst).tag(seconds)
+                    }
+                }
+            } header: {
+                Text("Оновлення")
+            } footer: {
+                Text("Рідше — менше навантаження на процесор. Рядок меню оновлюється не частіше ніж кожні 4 с.")
+                    .foregroundStyle(.secondary)
+            }
+
             Section("Рядок меню") {
                 Toggle("Температура процесора", isOn: $showTemperature)
                 Toggle("Завантаження процесора", isOn: $showCPU)
@@ -90,4 +104,8 @@ struct SettingsView: View {
             if actual != launchAtLogin { launchAtLogin = actual }
         }
     }
+}
+
+private extension String {
+    var capitalizedFirst: String { prefix(1).uppercased() + dropFirst() }
 }

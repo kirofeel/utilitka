@@ -189,6 +189,8 @@ struct PressScaleStyle: ButtonStyle {
 }
 
 /// Thin horizontal meter with a gradient fill.
+/// Deliberately not animated: values change every second, and an animation here makes SwiftUI
+/// redraw the whole panel frame by frame, which cost ~8% CPU with the panel open.
 struct UsageBar: View {
     let fraction: Double
     let tint: Tint
@@ -204,7 +206,6 @@ struct UsageBar: View {
             }
         }
         .frame(height: 4)
-        .animation(.spring(duration: 0.5, bounce: 0), value: fraction)
     }
 }
 

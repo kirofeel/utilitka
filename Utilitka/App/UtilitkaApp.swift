@@ -6,6 +6,7 @@ struct UtilitkaApp: App {
 
     init() {
         AlertSettings.register()
+        RefreshSettings.register()
         NotificationManager.shared.setUp()
         let store = MetricsStore()
         store.start()
